@@ -99,7 +99,7 @@ def two_layer_net(X, model, y=None, reg=0.0):
   # Compute the Softmax data_loss and Reg_loss
   max_score= scores.max (1) # first shift the values of scores so that the highest number is 0. 
   changed_scores -= max_score # Done to prevent from blowing up
-  p = np.exp(changed_scores) / np.sum(np.exp(changed_scores)) # normalized probability 
+  P = np.exp(changed_scores) / np.sum(np.exp(changed_scores)) # normalized probability 
   # MISSING How to formulate the Softmax data_loss by applying the -log(to those values of scores of an correct class for every example in X)
   
   reg_loss = reg * np.sum((np.W1**2) + (np.W2**2))
