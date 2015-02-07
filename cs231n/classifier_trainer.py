@@ -99,7 +99,8 @@ class ClassifierTrainer(object):
           #####################################################################
           pass
           #####################################################################
-          #                      END OF YOUR CODE                             #
+          step_cache[p] = momentum * step_cache[p] + learning_rate * grads[p] # updated step_cache[p]
+          dx = step_cache[p] # momentum update formula
           #####################################################################
         elif update == 'rmsprop':
           decay_rate = 0.99 # you could also make this an option
@@ -112,7 +113,8 @@ class ClassifierTrainer(object):
           #####################################################################
           pass
           #####################################################################
-          #                      END OF YOUR CODE                             #
+          step_cache[p] = decay_rate * step_cache[p] + (1 - decay_rate) * (grads[p]**2) # updated step_cache[p]
+          dx = - learning_rate * grads[p]/ np.sqrt(step_cache[p] + 1e-8) # RMSProp update
           #####################################################################
         else:
           raise ValueError('Unrecognized update type "%s"' % update)
