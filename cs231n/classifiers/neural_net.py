@@ -75,7 +75,10 @@ def two_layer_net(X, model, y=None, reg=0.0):
   #############################################################################
   pass
   #############################################################################
-  #                              END OF YOUR CODE                             #
+  # forward-pass of a 2-layer neural network with scores
+  h1 = np.maximum(0,np.dot(X, W1) + b1) # calculate first hidden layer activations 
+  out = np.maximum(0,np.dot(X, W2) + b2) # output neuron 
+  scores = out
   #############################################################################
   
   # If the targets are not given then jump out, we're done
@@ -93,7 +96,15 @@ def two_layer_net(X, model, y=None, reg=0.0):
   #############################################################################
   pass
   #############################################################################
-  #                              END OF YOUR CODE                             #
+  # Compute the Softmax data_loss and Reg_loss
+  max_score= scores.max (1) # first shift the values of scores so that the highest number is 0. 
+  changed_scores -= max_score # Done to prevent from blowing up
+  p = np.exp(changed_scores) / np.sum(np.exp(changed_scores)) # normalized probability 
+  # MISSING How to formulate the Softmax data_loss by applying the -log(to those values of scores of an correct class for every example in X)
+  
+  reg_loss = reg * np.sum((np.W1**2) + (np.W2**2))
+  loss = (1/N)*(data_loss) + 0.5*reg_loss
+   return loss
   #############################################################################
 
   # compute the gradients
@@ -105,7 +116,13 @@ def two_layer_net(X, model, y=None, reg=0.0):
   #############################################################################
   pass
   #############################################################################
-  #                              END OF YOUR CODE                             #
+  # grads initialization
+  grads[W1] = np.zeros(W1.shape)
+  grads[W2] = np.zeros(W2.shape)
+  grads[b1] = np.zeros(b1.shape)
+  grads[b2] = np.zeros(b2.shape)
+  
+  # Unable to code the gradients for matrices W1, W2 and biases.
   #############################################################################
 
   return loss, grads
