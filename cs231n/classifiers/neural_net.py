@@ -76,8 +76,8 @@ def two_layer_net(X, model, y=None, reg=0.0):
   pass
   #############################################################################
   # forward-pass of a 2-layer neural network with scores
-  h1 = np.maximum(0,np.dot(X, W1) + b1) # calculate first hidden layer activations 
-  out = np.maximum(0,np.dot(X, W2) + b2) # output neuron 
+  h1 = np.maximum(0,np.dot(X, W1) + b1) # calculated first hidden layer activations 
+  out = np.maximum(0,np.dot(X, W2) + b2) # output of network 
   scores = out
   #############################################################################
   
